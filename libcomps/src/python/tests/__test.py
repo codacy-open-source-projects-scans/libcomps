@@ -737,6 +737,22 @@ class COMPSTest(unittest.TestCase):
         comps4 = libcomps.Comps()
         self.assertRaises(libcomps.ParserError, comps4.fromxml_str, str(INVALID_COMPS_XML))
 
+        VALID_XML_NO_COMPS = "<whatever />"
+        comps5 = libcomps.Comps()
+        ret = comps5.fromxml_str(str(VALID_XML_NO_COMPS))
+        # return code 1 is non fatal error
+        self.assertTrue(ret == 1, comps5.get_last_errors())
+
+        VALID_XML_HEADER_NO_COMPS = """<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE variants PUBLIC "-//Red Hat, Inc.//DTD Variants info//EN" "variants.dtd">
+        <variants>
+        </variants>"""
+        comps6 = libcomps.Comps()
+        ret = comps6.fromxml_str(str(VALID_XML_HEADER_NO_COMPS))
+        # return code 1 is non fatal error
+        self.assertTrue(ret == 1, comps6.get_last_errors())
+
+
     #@unittest.skip("")
     def test_fedora(self):
         comps = libcomps.Comps()

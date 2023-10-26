@@ -69,10 +69,10 @@ START_TEST(test_comps_parse1)
     char *tmpstr;
 
     COMPS_ObjList * tmplist;
-    fprintf(stderr, "## Running test_parse1\n\n");
+    fprintf(stderr, "## Running test_parse1\n");
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
 
 
     fp = fopen("sample-comps.xml", "r");
@@ -171,7 +171,7 @@ START_TEST(test_comps_parse1)
     comps_parse_parsed_destroy(parsed);
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
     comps_parse_file(parsed, fp, NULL);
     ret = comps_parse_validate_dtd("sample-bad-elem.xml", "comps.dtd");
     fail_if(ret >0, "XML shouldn't be valid. Validation returned: %d", ret);
@@ -244,7 +244,7 @@ START_TEST(test_comps_parse2)
     //COMPS_ListItem *it;
     int i;
 
-    fprintf(stderr, "## Running test_parse2\n\n");
+    fprintf(stderr, "## Running test_parse2\n");
     COMPS_LogEntry* known_errors[10];
     known_errors[0] = __log_entry_x(COMPS_ERR_NOCONTENT, 3,
                                     comps_str("description"),
@@ -280,7 +280,7 @@ START_TEST(test_comps_parse2)
     //                                         COMPS_ERR_ELEM_REQUIRED, 1201, 2, 0);
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
     fp = fopen("sample_comps.xml", "r");
     comps_parse_file(parsed, fp, NULL);
 
@@ -307,7 +307,7 @@ START_TEST(test_comps_parse3)
     COMPS_LogEntry* known_errors[3];
     COMPS_Object *tmpobj;
 
-    fprintf(stderr, "## Running test_parse3\n\n");
+    fprintf(stderr, "## Running test_parse3\n");
 
     known_errors[0] = __log_entry_x(COMPS_ERR_ELEM_REQUIRED, 3,
                                              comps_str("id"), comps_num(188),
@@ -320,7 +320,7 @@ START_TEST(test_comps_parse3)
                                              comps_num(188), comps_num(2));
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
     fp = fopen("sample_comps_bad1.xml", "r");
     comps_parse_file(parsed, fp, NULL);
 
@@ -363,7 +363,7 @@ START_TEST(test_comps_parse4)
     int i;
     //COMPS_List * tmplist;
     COMPS_LogEntry* known_errors[15];
-    fprintf(stderr, "## Running test_parse4\n\n");
+    fprintf(stderr, "## Running test_parse4\n");
 
     known_errors[0] = __log_entry_x(COMPS_ERR_NOPARENT, 3, comps_str("id"),
                                     comps_num(4), comps_num(2));
@@ -413,7 +413,7 @@ START_TEST(test_comps_parse4)
                                      comps_num(1244), comps_num(4));
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
     fp = fopen("sample_comps_bad2.xml", "r");
     comps_parse_file(parsed, fp, NULL);
 
@@ -435,7 +435,7 @@ START_TEST(test_comps_parse5)
     //COMPS_ListItem *it;
     //int ret
     int i;
-    fprintf(stderr, "## Running test_parse5\n\n");
+    fprintf(stderr, "## Running test_parse5\n");
     COMPS_LogEntry* known_errors[2];
 
     known_errors[0] = __log_entry_x(COMPS_ERR_TEXT_BETWEEN, 3,
@@ -446,7 +446,7 @@ START_TEST(test_comps_parse5)
                                     comps_num(2));
 
     parsed = comps_parse_parsed_create();
-    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 1) == 0);
+    fail_if(comps_parse_parsed_init(parsed, "UTF-8", 0) == 0);
     fp = fopen("sample_comps_bad3.xml", "r");
     comps_parse_file(parsed, fp, NULL);
     //comps_log_print(parsed->log);
