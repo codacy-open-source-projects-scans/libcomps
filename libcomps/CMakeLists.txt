@@ -1,5 +1,12 @@
+cmake_minimum_required (VERSION 3.10)
 project(libcomps C)
-cmake_minimum_required (VERSION 2.8.10)
+
+if("${CMAKE_VERSION}" VERSION_GREATER_EQUAL "3.27")
+  cmake_policy(SET CMP0148 OLD)
+endif()
+if ("${CMAKE_VERSION}" VERSION_GREATER_EQUAL "3.31")
+  cmake_policy(SET CMP0175 NEW)
+endif()
 
 include (GNUInstallDirs)
 include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
@@ -32,7 +39,7 @@ include_directories("${PROJECT_SOURCE_DIR}/src")
 #include_directories("${PROJECT_SOURCE_DIR}/src/libcomps")
 
 if (ENABLE_TESTS)
-  find_library(CHECK_LIBRARY NAMES check)
+  find_library(CHECK_LIBRARY REQUIRED NAMES check)
 endif()
 find_library(EXPAT_LIBRARY NAMES expat)
 
